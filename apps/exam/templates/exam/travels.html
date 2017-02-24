@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Travel Plans</title>
+  </head>
+  <body>
+    <a href="/logout">Logout</a>
+    <h1>Hello, {{request.session.theuser}}</h1>
+
+    <h3>Your Trip Schedules</h3>
+    <table>
+      <th>Destination</th>
+      <th>Travel Start Date</th>
+      <th>Travel End Date</th>
+      <th>Plan</th>
+      {% for travel in travel %}
+        <tr>
+          <td><a href="/travels/destination/{{travel.id}}">{{travel.destination}}</a></td>
+          <td>{{travel.startdate}}</td>
+          <td>{{travel.enddate}}</td>
+          <td>{{travel.plan}}</td>
+        </tr>
+      {% endfor%}
+    </table>
+    <h3>Other User's Travel Plans</h3>
+    <table>
+      <th>Name</th>
+      <th>Destination</th>
+      <th>Travel Start Date</th>
+      <th>Travel End Date</th>
+      <th>Do you want to join?</th>
+      {% for travel in everyone %}
+        <tr>
+          <td>{{travel.user.name}}</td>
+          <td><a href="/travels/destination/{{travel.id}}">{{travel.destination}}</a></td>
+          <td>{{travel.startdate}}</td>
+          <td>{{travel.enddate}}</td>
+          <td><a href="/join/{{travel.id}}">Join</a></td>
+        </tr>
+      {%endfor%}
+    </table>
+
+    <a href="/add">Add a Travel Plan</a>
+  </body>
+</html>
